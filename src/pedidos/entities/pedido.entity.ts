@@ -10,9 +10,7 @@ export class Pedido {
   @Column()
   fecha: string;
 
-  @ManyToMany(() => Item, (Item) => Item.id,{
-    cascade: true,
-  })
+  @ManyToMany(() => Item, (Item) => Item.id)
   @JoinTable()
   items: Item[];
 

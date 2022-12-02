@@ -9,7 +9,8 @@ export class EmpleadosController {
     constructor(private empleadoService: EmpleadoService) {}
 
     @Post()
-    create(@Body() createEmpleadoDto: CreateEmpleadoDto): Promise<Empleado>{
+    create(@Body() createEmpleadoDto: Empleado): Promise<Empleado>{
+      
       return this.empleadoService.create(createEmpleadoDto);
     }
   

@@ -8,15 +8,19 @@ import { Repository } from "typeorm";
 export class EmpleadoService {
     constructor(@InjectRepository(Empleado) private EmpleadoRepository: Repository<Empleado>) {
     }
-    create(createEmpleadoDto: CreateEmpleadoDto){
+    create(createEmpleadoDto: Empleado){
       return this.EmpleadoRepository.save(createEmpleadoDto);
     }
   
     findAll() {
-      return this.EmpleadoRepository.find();
+      return this.EmpleadoRepository.find({
+          relations: {
+              pedidos: true,
+          },
+      });
     }
   
-    findOne(Id: number): Promise<Empleado> {
+    findOne(Id: number){
       return this.EmpleadoRepository.findOne({ where: { id: Id}});
     }
 

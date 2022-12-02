@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {Pedido} from "../../pedidos/entities/pedido.entity"
 
 @Entity()
 export class Empleado {
@@ -10,4 +11,6 @@ export class Empleado {
   rol: string;
   @Column()
   genero: string;
+  @OneToMany(()=> Pedido, (pedido)=>pedido.empleado)
+  pedidos: Pedido[]
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Item } from 'src/items/entities/item.entity';
 import { Empleado } from 'src/empleados/entities/empleado.entity';
 
@@ -10,10 +10,12 @@ export class Pedido {
   @Column()
   fecha: string;
 
-  @OneToMany(() => Item, (Item) => Item.id)
-  items:Item[];
+  @ManyToMany(() => Item, (Item) => Item.id,{
+    cascade: true,
+  })
+  @JoinTable()
+  items: Item[];
 
-  @OneToOne(() => Empleado)
-  @JoinColumn()
+  @ManyToOne(() => Empleado, (empleado)=>empleado.pedidos)
   empleado:Empleado;
 }

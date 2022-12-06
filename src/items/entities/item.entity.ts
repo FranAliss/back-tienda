@@ -1,5 +1,5 @@
 import { Pedido } from 'src/pedidos/entities/pedido.entity';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn, JoinTable } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn, JoinTable, OneToMany } from 'typeorm';
 
 @Entity()
 export class Item {
@@ -9,8 +9,8 @@ export class Item {
   nombre: string;
   @Column()
   precio: number;
-  @ManyToMany(()=>Pedido, pedido => pedido.items,{
+  @OneToMany(()=>Pedido, pedido => pedido.items,{
     cascade: true,
   })
-  items: Item[];
+  pedidos: Pedido[];
 }

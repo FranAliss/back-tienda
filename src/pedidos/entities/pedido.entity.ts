@@ -10,8 +10,7 @@ export class Pedido {
   @Column()
   fecha: string;
 
-  @ManyToMany(() => Item, (Item) => Item.id)
-  @JoinTable()
+  @ManyToOne(() => Item, (Item) => Item.pedidos)
   items: Item[];
 
   @ManyToOne(() => Empleado, (empleado)=>empleado.pedidos)
